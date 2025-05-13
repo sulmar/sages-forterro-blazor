@@ -16,6 +16,7 @@ git clone https://github.com/sulmar/sages-forterro-blazor
 ```
 2. Zbuduj
 ```
+cd sages-forterro-blazor
 cd src
 dotnet build
 ```
