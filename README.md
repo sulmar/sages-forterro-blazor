@@ -12,7 +12,7 @@ Do rozpoczęcia tego kursu potrzebujesz następujących rzeczy:
 ## Przygotowanie
 1. Sklonuj repozytorium Git
 ```
-git clone https://github.com/sulmar/...
+git clone https://github.com/sulmar/sages-forterro-blazor
 ```
 2. Zbuduj
 ```
