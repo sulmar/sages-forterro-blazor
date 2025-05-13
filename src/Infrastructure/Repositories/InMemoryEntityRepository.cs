@@ -35,7 +35,7 @@ public class InMemoryEntityRepository<T> : IEntityRepository<T>
         return _entities.Values.AsEnumerable();
     }
 
-    public async Task<T> GetByIdAsync(int id)
+    public async Task<T?> GetByIdAsync(int id)
     {
         await Task.Delay(2000); // Simulate a delay
 
