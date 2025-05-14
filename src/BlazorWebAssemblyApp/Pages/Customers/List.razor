@@ -6,12 +6,19 @@
 
 <p>@message</p>
 
-<ul>
-@foreach(var customer in customers)
+@if (customers == null)
 {
-    <li>@customer.Id @customer.Name @customer.Email</li>
+    <p><em>Loading...</em></p>
 }
-</ul>
+else
+{
+    <ul>
+        @foreach (var customer in customers)
+        {
+            <li>@customer.Id @customer.Name @customer.Email</li>
+        }
+    </ul>
+}
 
 @code {
 
