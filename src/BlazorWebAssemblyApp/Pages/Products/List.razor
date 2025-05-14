@@ -1,0 +1,21 @@
+﻿@page "/products"
+@using BlazorWebAssemblyApp.Shared
+@using Domain.Abstractions
+@using Domain.Models
+@inject IProductRepository repository
+
+<LoaderComponent Items="@products" Title="Loading Products...">
+    <ProductsTable Products="@products" />
+</LoaderComponent>
+
+@code {
+
+    private IEnumerable<Product>? products;
+
+    protected override async Task OnInitializedAsync()
+    {
+        products = await repository.GetAllAsync();
+    }
+
+
+}

@@ -1,0 +1,21 @@
+﻿@using Domain.Models
+
+<TableTemplate Items="@Customers" Context="customer">
+    <HeaderTemplate>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+    </HeaderTemplate>
+
+    <RowTemplate> 
+        <td>@customer.Id</td>
+        <td>@customer.Name</td>
+        <td>@customer.Email</td>
+    </RowTemplate>
+</TableTemplate>
+
+@code {
+
+    [Parameter, EditorRequired]
+    public required IEnumerable<Customer>  Customers { get; set; }
+}

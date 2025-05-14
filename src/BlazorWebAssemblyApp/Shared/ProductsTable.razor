@@ -1,0 +1,23 @@
+﻿@using Domain.Models
+
+<TableTemplate Items="@Products" Context="product">
+    <HeaderTemplate>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+    </HeaderTemplate>
+
+    <RowTemplate>
+        <td>@product.Id</td>
+        <td>@product.Name</td>
+        <td>@product.Description</td>
+        <td>@product.Price</td>
+    </RowTemplate>
+</TableTemplate>
+
+@code {
+
+    [Parameter, EditorRequired]
+    public required IEnumerable<Product> Products { get; set; }
+}

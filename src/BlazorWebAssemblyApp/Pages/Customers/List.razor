@@ -8,9 +8,5 @@
 <p>@message</p>
 
 <LoaderComponent Items="@customers" Title="Loading Customers...">
-    <ListItemsComponent Items="@customers">
-        <ItemTemplate Context="customer">
-            <li>@customer.Id @customer.Name @customer.Email</li>
-        </ItemTemplate>
-    </ListItemsComponent>
+    <CustomersTable Customers="@customers" />
 </LoaderComponent>
