@@ -10,8 +10,8 @@
 <LoaderComponent Items="@customers" Title="Loading Customers..."  >
     <ItemsTemplate>
        <ListItemsComponent Items="@customers">
-           <ItemTemplate>
-                <li>@context.Id @context.Name @context.Email</li>
+           <ItemTemplate Context="customer">
+                <li>@customer.Id @customer.Name @customer.Email</li>
            </ItemTemplate>
        </ListItemsComponent>
     </ItemsTemplate>
