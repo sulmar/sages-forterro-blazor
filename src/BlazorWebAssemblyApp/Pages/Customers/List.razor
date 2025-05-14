@@ -7,4 +7,13 @@
 
 <p>@message</p>
 
-<LoaderComponent Items="@customers" Title="Loading Customers..." />
+<LoaderComponent Items="@customers" Title="Loading Customers..." >
+    <ItemsTemplate>
+        <ul>
+            @foreach (var item in customers)
+            {
+                <li>@item.Id @item.Name @item.Email</li>
+            }
+        </ul>
+    </ItemsTemplate>
+</LoaderComponent>

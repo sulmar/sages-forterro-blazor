@@ -6,12 +6,7 @@
 }
 else
 {
-    <ul>
-        @foreach (var item in Items)
-        {
-            <li>@item</li>
-        }
-    </ul>
+    @ItemsTemplate
 }
 
 @code {
@@ -21,5 +16,8 @@ else
 
     [Parameter]
     public string Title { get; set; } = "Loading Items...";
+
+    [Parameter]
+    public RenderFragment ItemsTemplate { get; set; }
 
 }
