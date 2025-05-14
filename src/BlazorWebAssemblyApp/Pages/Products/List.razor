@@ -1,7 +1,4 @@
 ﻿@page "/products"
-@using BlazorWebAssemblyApp.Shared
-@using Domain.Abstractions
-@using Domain.Models
 @inject IProductRepository repository
 
 <LoaderComponent Items="@products" Title="Loading Products...">
