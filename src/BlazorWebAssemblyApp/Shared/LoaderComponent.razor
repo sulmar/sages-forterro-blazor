@@ -6,7 +6,7 @@
 }
 else
 {
-    @ItemsTemplate
+    @ChildContent
 }
 
 @code {
@@ -18,6 +18,6 @@ else
     public required string Title { get; set; } = "Loading Items...";
 
     [Parameter, EditorRequired]
-    public required RenderFragment ItemsTemplate { get; set; }
+    public required RenderFragment ChildContent { get; set; } // Nazwa ma znaczenie!
 
 }
