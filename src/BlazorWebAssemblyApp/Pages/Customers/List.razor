@@ -1,7 +1,7 @@
 ﻿@page "/customers"
 @using Domain.Abstractions
 @using Domain.Models
-@inject ICustomerRepository Repository
+
 
 <h3>Customer List</h3>
 
@@ -19,16 +19,4 @@ else
             <li>@customer.Id @customer.Name @customer.Email</li>
         }
     </ul>
-}
-
-@code {
-
-    private string message = $"Lorem ipsum {DateTime.Now}";
-
-    private IEnumerable<Customer>? customers;
-
-    protected override async Task OnInitializedAsync()
-    {
-        customers = await Repository.GetAllAsync();
-    }
 }
