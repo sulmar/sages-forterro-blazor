@@ -1,6 +1,7 @@
 ﻿@page "/customers"
 @using Domain.Abstractions
 @using Domain.Models
+@inject ICustomerRepository Repository
 
 <h3>Customer List</h3>
 
@@ -25,9 +26,6 @@ else
     private string message = $"Lorem ipsum {DateTime.Now}";
 
     private IEnumerable<Customer>? customers;
-
-    [Inject]
-    private ICustomerRepository Repository { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
