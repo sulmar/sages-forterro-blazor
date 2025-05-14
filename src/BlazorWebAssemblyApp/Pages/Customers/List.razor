@@ -9,11 +9,10 @@
 
 <LoaderComponent Items="@customers" Title="Loading Customers..."  >
     <ItemsTemplate>
-        <ul>
-            @foreach (var item in customers)
-            {
-                <li>@item.Id @item.Name @item.Email</li>
-            }
-        </ul>
+       <ListItemsComponent Items="@customers">
+           <ItemTemplate>
+                <li>@context.Id @context.Name @context.Email</li>
+           </ItemTemplate>
+       </ListItemsComponent>
     </ItemsTemplate>
 </LoaderComponent>
