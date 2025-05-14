@@ -7,16 +7,4 @@
 
 <p>@message</p>
 
-@if (customers == null)
-{
-   <TitleComponent Title="Loading Customers..." />
-}
-else
-{
-    <ul>
-        @foreach (var customer in customers)
-        {
-            <li>@customer.Id @customer.Name @customer.Email</li>
-        }
-    </ul>
-}
+<LoaderComponent Items="@customers" Title="Loading Customers..." />

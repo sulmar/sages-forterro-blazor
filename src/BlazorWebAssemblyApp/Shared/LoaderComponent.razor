@@ -1,0 +1,25 @@
+﻿@typeparam TItem    
+
+@if (Items == null)
+{
+    <TitleComponent Title="@Title" />
+}
+else
+{
+    <ul>
+        @foreach (var item in Items)
+        {
+            <li>@item</li>
+        }
+    </ul>
+}
+
+@code {
+
+    [Parameter]
+    public IEnumerable<TItem> Items { get; set; }
+
+    [Parameter]
+    public string Title { get; set; } = "Loading Items...";
+
+}
