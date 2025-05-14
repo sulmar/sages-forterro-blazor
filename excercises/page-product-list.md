@@ -6,7 +6,6 @@ Twoim zadaniem jest stworzenie strony w Blazorze, który wyświetla listę produ
 ## Wymagania funkcjonalne:
 Na stronie powinna być widoczna tabela z listą produktów. Każdy wiersz powinien zawierać:
 - Nazwa produktu
-- Kod produktu
 - Cena
 - Opis
 - Data ważności
