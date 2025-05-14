@@ -3,16 +3,10 @@ using Domain.Models;
 
 namespace BlazorWebAssemblyApp.Pages.Customers;
 
-public partial class List
+public partial class List(ICustomerRepository repository) // Primary Constructor
 {
     private string message = $"Lorem ipsum {DateTime.Now}";
     private IEnumerable<Customer>? customers;
-
-    private readonly ICustomerRepository repository;
-    public List(ICustomerRepository repository)
-    {
-        this.repository = repository;
-    }
 
     protected override async Task OnInitializedAsync()
     {
