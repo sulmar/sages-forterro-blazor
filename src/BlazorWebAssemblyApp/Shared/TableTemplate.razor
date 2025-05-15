@@ -1,6 +1,6 @@
 ﻿@typeparam TItem
 
-<table>
+<table class="table table-@Theme">
     <thead>
         <tr>
             @HeaderTemplate
@@ -18,6 +18,9 @@
 </table>
 
 @code {
+
+    [CascadingParameter]
+    public string Theme { get; set; } = "light";
 
     [Parameter, EditorRequired]
     public required IEnumerable<TItem> Items { get; set; }
