@@ -1,9 +1,12 @@
 ﻿using Domain.Abstractions;
 using Domain.Models;
+using System.Net.Http.Json;
 
 namespace BlazorWebAssemblyApp.Pages.Customers;
 
-public partial class List(ICustomerRepository repository) // Primary Constructor
+
+// dotnet add package Microsoft.Extensions.Http
+public partial class List(HttpClient http) // Primary Constructor
 {
     private string message = $"Lorem ipsum {DateTime.Now}";
 
@@ -11,6 +14,6 @@ public partial class List(ICustomerRepository repository) // Primary Constructor
 
     protected override async Task OnInitializedAsync()
     {
-        customers = await repository.GetAllAsync();
+        customers = await http.GetFromJsonAsync<IEnumerable<Customer>>("api/customers");
     }
 }
