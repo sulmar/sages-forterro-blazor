@@ -61,6 +61,9 @@ builder.Services.AddScoped<IdentityContext>(sp =>
 
 var app = builder.Build();
 
+
+app.MapGet("/", () => "Hello Auth.Api");
+
 app.MapPost("/api/login", async (LoginRequest request, IAuthService authService, ITokenService tokenService) => { 
 
     var result = await authService.AuthorizeAsync(request.Username, request.Password);
@@ -70,7 +73,7 @@ app.MapPost("/api/login", async (LoginRequest request, IAuthService authService,
         // Generate JWT (Json Web Token)
         var accessToken = tokenService.GenerateAccessToken(result.Identity);
 
-        return Results.Ok(accessToken);
+        return Results.Ok(new { access_token = accessToken });
     }
 
     return Results.Unauthorized();
