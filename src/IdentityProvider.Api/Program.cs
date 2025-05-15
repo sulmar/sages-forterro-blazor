@@ -83,3 +83,4 @@ app.MapPost("/api/login", async (LoginRequest request, IAuthService authService,
 app.Run();
 
 record LoginRequest(string Username, string Password);
+
