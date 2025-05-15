@@ -1,6 +1,5 @@
 ﻿@page "/products"
-@inject HttpClient http
-@inject IProductRepository repository
+@inject IHttpClientFactory factory
 
 <LoaderComponent Items="@products" Title="Loading Products...">
     <ProductsTable Products="@products" />
@@ -12,7 +11,9 @@
 
     protected override async Task OnInitializedAsync()
     {
-        products = await repository.GetAllAsync();
+        var http = factory.CreateClient("Api");
+
+        products = await http.GetFromJsonAsync<IEnumerable<Product>>("api/products");
     }
 
 

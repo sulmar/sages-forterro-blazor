@@ -14,7 +14,7 @@ public partial class List(IHttpClientFactory factory) // Primary Constructor
 
     protected override async Task OnInitializedAsync()
     {
-        var http = factory.CreateClient("CustomersApi");
+        var http = factory.CreateClient("Api");
 
         customers = await http.GetFromJsonAsync<IEnumerable<Customer>>("api/customers");
     }

@@ -25,6 +25,15 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
     policy.WithOrigins("https://localhost:7034").WithMethods("GET").AllowAnyHeader();
 }));
 
+// Products
+builder.Services.AddScoped<Faker<Product>, ProductFaker>();
+builder.Services.AddScoped<IEnumerable<Product>>(sp =>
+{
+    var faker = sp.GetRequiredService<Faker<Product>>();
+    return faker.Generate(100);
+});
+builder.Services.AddScoped<IProductRepository, InMemoryProductRepository>();
+
 var app = builder.Build();
 
 app.UseCors();
@@ -32,5 +41,6 @@ app.UseCors();
 app.MapGet("/", () => "Hello Api!");
 
 app.MapGet("api/customers", async (ICustomerRepository repository) => await repository.GetAllAsync());
+app.MapGet("api/products", async (IProductRepository productRepository) => await productRepository.GetAllAsync());
 
 app.Run();
