@@ -1,4 +1,5 @@
 using BlazorWebAssemblyApp;
+using BlazorWebAssemblyApp.Models;
 using BlazorWebAssemblyApp.Services;
 using Bogus;
 using Domain.Abstractions;
@@ -30,5 +31,13 @@ builder.Services.AddHttpClient("NbpApi", http =>
     http.BaseAddress = new Uri("https://api.nbp.pl/");
 });
 
+builder.Services.AddCascadingValue<ApplicationState>(sp => new ApplicationState
+{
+    ApplicationName = "Shopper",
+    ApplicationVersion = "1.0",
+    RunnedOn = DateTime.Now,
+});
+
+builder.Services.AddCascadingValue<FilterState>(sp => new FilterState {  SelectedCustomerId = 1, SelectedUserId  = 2 });
 
 await builder.Build().RunAsync();

@@ -6,15 +6,13 @@
 
 <p>@message</p>
 
+<CascadingValue Value="@info">
+    <LoaderComponent Items="@customers">
+        <CustomersTable Customers="@customers" />
+    </LoaderComponent>
+</CascadingValue>
 
-
-    <CascadingValue Value="@info">
-        <LoaderComponent Items="@customers">
-            <CustomersTable Customers="@customers" />
-        </LoaderComponent>
-    </CascadingValue>
-
-
+<p>SelectedCustomerId: @Filter.SelectedCustomerId</p>
 
 @code {
     private string title = "Loading Customers...";
@@ -25,5 +23,5 @@
 
     private Info info => new Info { Title = title, Description = description, Count = customerCount };
 
- 
+
 }
