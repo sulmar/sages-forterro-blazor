@@ -3,8 +3,14 @@
 
 <h3>Customer List</h3>
 
+<div>
+    <form method="post">
+        <label for="searchText">Type search text:</label>
+        <input type="text" id="searchText" name="searchText" @bind-value="@searchText" />
+        <button type="button" @onclick="HandleSearch" class="btn btn-primary">Search</button>
+    </form>
+</div>
 
-<p>@message</p>
 
 <CascadingValue Value="@info">
     <LoaderComponent Items="@customers">
@@ -23,5 +29,11 @@
 
     private Info info => new Info { Title = title, Description = description, Count = customerCount };
 
+    private string searchText = "a";
+
+    private void HandleSearch()
+    {
+        Console.WriteLine(searchText);
+    }
 
 }
