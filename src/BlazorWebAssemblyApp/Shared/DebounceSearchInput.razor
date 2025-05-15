@@ -11,6 +11,9 @@
     [Parameter]
     public int DebounceMiliseconds { get; set; } = 500;
 
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+
     private string searchText = "a";
 
     private async Task HandleSearch()
@@ -27,6 +30,8 @@
             if (!token.IsCancellationRequested)
             {
                 Console.WriteLine(searchText);
+
+                await ValueChanged.InvokeAsync(searchText);
             }
         }
         catch (TaskCanceledException) { }

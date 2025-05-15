@@ -7,7 +7,7 @@
     <form method="post">
         <label for="searchText">Type search text:</label>
 
-        <DebounceSearchInput DebounceMiliseconds="600" />
+        <DebounceSearchInput DebounceMiliseconds="600" ValueChanged="@OnSearch" />
 
         <button type="button" class="btn btn-primary">Search</button>
     </form>
@@ -34,9 +34,9 @@
     private Info info => new Info { Title = title, Description = description, Count = customerCount };
 
 
-    private async Task OnSearch()
+    private async Task OnSearch(string text)
     {
-        
+        Console.WriteLine($"OnSearch {text} fired!");
     }
 
     
