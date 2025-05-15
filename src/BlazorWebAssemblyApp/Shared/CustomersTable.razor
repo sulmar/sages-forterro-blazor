@@ -5,12 +5,16 @@
         <th>Id</th>
         <th>Name</th>
         <th>Email</th>
+        <th></th>
     </HeaderTemplate>
 
     <RowTemplate> 
         <td>@customer.Id</td>
         <td>@customer.Name</td>
         <td>@customer.Email</td>
+        <td>
+            <a class="btn btn-primary" href="/customers/view/@customer.Id">View</a>
+        </td>
     </RowTemplate>
 </TableTemplate>
 
