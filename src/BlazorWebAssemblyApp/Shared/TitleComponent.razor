@@ -1,19 +1,14 @@
-﻿
-<p><em>@Title</em></p>
+﻿@using BlazorWebAssemblyApp.Models
 
-<p>@Description</p>
+<p><em>@Info.Title</em></p>
 
-<p>@Count</p>
+<p>@Info.Description</p>
+
+<p>@Info.Count</p>
 
 @code {
-    [CascadingParameter(Name = "a")]
-    public string Title { get; set; } = "Loading...";
-
-    [CascadingParameter(Name = "b")]
-    public string Description { get; set; }
 
     [CascadingParameter]
-    public int Count { get; set; }
-
+    public Info Info { get; set; }
 }
 
