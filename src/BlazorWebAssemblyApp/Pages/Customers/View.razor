@@ -1,0 +1,28 @@
+﻿@page "/customers/view/{id:int}"
+@inject ICustomerService Api
+
+<h3>View</h3>
+
+@if (customer == null)
+{
+
+}
+else
+{
+   <h2>@customer.Name</h2>
+   <em>@customer.Email</em>
+}
+
+@code {
+
+    [Parameter]
+    public int Id { get; set; }
+
+    private Customer customer;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        customer = await Api.GetByIdAsync(Id);
+    }
+
+}
