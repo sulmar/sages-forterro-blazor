@@ -10,13 +10,31 @@
 }
 else
 {
-    <EditForm Model="@customer" OnSubmit="@HandleSubmit">
+    <EditForm Model="@customer" OnValidSubmit="@HandleSubmit">
+
+        <DataAnnotationsValidator />
+
+        <ValidationSummary />
 
         <label for="name">Name:</label>
         <InputText id="name" @bind-Value="customer.Name" />
+        <ValidationMessage For="()=>customer.Name" />
 
         <label for="email">Email:</label>
         <InputText id="email" @bind-Value="customer.Email" />
+        <ValidationMessage For="()=>customer.Email" />
+
+        <label for="balance">Balance:</label>
+        <InputNumber id="balance" @bind-Value="customer.Balance" />
+        <ValidationMessage For="()=>customer.Balance" />
+
+        <label for="hashedPassword">HashedPassword:</label>
+        <InputText id="hashedPassword" @bind-Value="customer.HashedPassword" />
+        <ValidationMessage For="()=>customer.HashedPassword" />
+
+        <label for="confirmedPassword">ConfirmedPassword:</label>
+        <InputText id="confirmedPassword" @bind-Value="customer.ConfirmedPassword" />
+        <ValidationMessage For="()=>customer.ConfirmedPassword" />
 
         <button type="submit" class="btn btn-primary">Submit</button>
 
