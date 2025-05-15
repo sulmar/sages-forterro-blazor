@@ -2,7 +2,7 @@
 
 @if (Items == null)
 {
-    <TitleComponent Title="@Title" />
+    <TitleComponent />
 }
 else
 {
@@ -13,9 +13,6 @@ else
 
     [Parameter]
     public IEnumerable<TItem> Items { get; set; }
-
-    [Parameter, EditorRequired]
-    public required string Title { get; set; } = "Loading Items...";
 
     [Parameter, EditorRequired]
     public required RenderFragment ChildContent { get; set; } // Nazwa ma znaczenie!

@@ -4,6 +4,14 @@
 
 <p>@message</p>
 
-<LoaderComponent Items="@customers" Title="Loading Customers...">
-    <CustomersTable Customers="@customers" />
-</LoaderComponent>
+<CascadingValue Value="@title">
+
+    <LoaderComponent Items="@customers">
+        <CustomersTable Customers="@customers" />
+    </LoaderComponent>
+
+</CascadingValue>
+
+@code {
+    private string title = "Loading Customers...";
+}
