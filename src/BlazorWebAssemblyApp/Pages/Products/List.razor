@@ -1,5 +1,5 @@
 ﻿@page "/products"
-@inject IHttpClientFactory factory
+@inject IProductService Api
 
 <LoaderComponent Items="@products" Title="Loading Products...">
     <ProductsTable Products="@products" />
@@ -11,10 +11,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        var http = factory.CreateClient("Api");
-
-        products = await http.GetFromJsonAsync<IEnumerable<Product>>("api/products");
+        products = await Api.GetAllAsync();
     }
-
-
 }

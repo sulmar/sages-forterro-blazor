@@ -1,4 +1,5 @@
 using BlazorWebAssemblyApp;
+using BlazorWebAssemblyApp.Services;
 using Bogus;
 using Domain.Abstractions;
 using Domain.Models;
@@ -13,10 +14,15 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-// Nazwany klient Http
-builder.Services.AddHttpClient("Api", http =>
+// Silnie typowany klient Http
+builder.Services.AddHttpClient<ICustomerService, ApiCustomerService>(http =>
 {
     http.BaseAddress = new Uri("https://localhost:7214/");    
+});
+
+builder.Services.AddHttpClient<IProductService, ApiProductService>(http =>
+{
+    http.BaseAddress = new Uri("https://localhost:7214/");
 });
 
 builder.Services.AddHttpClient("NbpApi", http =>
