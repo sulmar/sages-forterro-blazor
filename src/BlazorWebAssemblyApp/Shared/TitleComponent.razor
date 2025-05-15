@@ -1,9 +1,19 @@
 ﻿
 <p><em>@Title</em></p>
 
+<p>@Description</p>
+
+<p>@Count</p>
+
 @code {
-    [CascadingParameter]
+    [CascadingParameter(Name = "a")]
     public string Title { get; set; } = "Loading...";
+
+    [CascadingParameter(Name = "b")]
+    public string Description { get; set; }
+
+    [CascadingParameter]
+    public int Count { get; set; }
 
 }
 
