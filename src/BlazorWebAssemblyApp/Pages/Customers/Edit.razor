@@ -1,0 +1,46 @@
+﻿@page "/customers/edit/{id:int}"
+@inject ICustomerService Api
+
+
+<h3>Edit</h3>
+
+@if (customer == null)
+{
+
+}
+else
+{
+    <EditForm Model="@customer" OnSubmit="@HandleSubmit">
+
+        <label for="name">Name:</label>
+        <InputText id="name" @bind-Value="customer.Name" />
+
+        <label for="email">Email:</label>
+        <InputText id="email" @bind-Value="customer.Email" />
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </EditForm>
+}
+
+
+@code {
+
+    [Parameter]
+    public int Id { get; set; }
+
+    private Customer customer;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        customer = await Api.GetByIdAsync(Id);
+    }
+
+    private async Task HandleSubmit()
+    {
+        Console.WriteLine($"HandleSubmit {customer.Name} {customer.Email}");
+        // TODO: Dodać implementację
+        // await Api.UpdateAsync(customer);
+    }
+
+}
