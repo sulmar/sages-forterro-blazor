@@ -1,13 +1,24 @@
 ﻿@page "/products"
+@using BlazorWebAssemblyApp.Models
 @inject IProductService Api
 
-<LoaderComponent Items="@products" Title="Loading Products...">
-    <ProductsTable Products="@products" />
-</LoaderComponent>
+<CascadingValue Value="@info">
+    <LoaderComponent Items="@products">
+        <ProductsTable Products="@products" />
+    </LoaderComponent>
+</CascadingValue>
 
 @code {
 
     private IEnumerable<Product>? products;
+
+    private string title = "Loading Products...";
+
+    private int productCount = 100;
+
+    private string description = "Lorem ipsum";
+
+    private Info info => new Info { Title = title, Description = description, Count = productCount };
 
     protected override async Task OnInitializedAsync()
     {
