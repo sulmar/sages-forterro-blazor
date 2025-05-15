@@ -2,6 +2,8 @@
 @using BlazorWebAssemblyApp.Models
 @inject IProductService Api
 
+<h3>Product List</h3>
+
 <CascadingValue Value="@info">
     <LoaderComponent Items="@products">
         <ProductsTable Products="@products" />
