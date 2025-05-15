@@ -6,7 +6,7 @@
 <div>
     <form method="post">
         <label for="searchText">Type search text:</label>
-        <input type="text" id="searchText" name="searchText" @bind-value="@searchText" />
+        <input type="text" id="searchText" name="searchText" @bind="@searchText" @bind:after="@HandleSearch" @bind:event="oninput" />
         <button type="button" @onclick="HandleSearch" class="btn btn-primary">Search</button>
     </form>
 </div>
@@ -21,6 +21,8 @@
 <p>SelectedCustomerId: @Filter.SelectedCustomerId</p>
 
 @code {
+    private CancellationTokenSource cts;
+
     private string title = "Loading Customers...";
 
     private int customerCount = 100;
@@ -31,9 +33,26 @@
 
     private string searchText = "a";
 
-    private void HandleSearch()
+    [Parameter]
+    public int DebounceMiliseconds { get; set; } = 500;
+
+    private async Task HandleSearch()
     {
-        Console.WriteLine(searchText);
+        cts?.Cancel();
+        cts = new CancellationTokenSource();
+
+        var token = cts.Token;
+
+        try
+        {
+            await Task.Delay(DebounceMiliseconds, token);
+
+            if (!token.IsCancellationRequested)
+            {
+                Console.WriteLine(searchText);
+            }
+        }
+        catch(TaskCanceledException) {}
     }
 
 }
