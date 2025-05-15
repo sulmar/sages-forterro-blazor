@@ -11,9 +11,18 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-var baseAddress = "https://localhost:7214/";
-// builder.HostEnvironment.BaseAddress
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(baseAddress) });
+builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+// Nazwany klient Http
+builder.Services.AddHttpClient("CustomersApi", http =>
+{
+    http.BaseAddress = new Uri("https://localhost:7214/");    
+});
+
+builder.Services.AddHttpClient("NbpApi", http =>
+{
+    http.BaseAddress = new Uri("https://api.nbp.pl/");
+});
 
 
 // Products

@@ -6,7 +6,7 @@ namespace BlazorWebAssemblyApp.Pages.Customers;
 
 
 // dotnet add package Microsoft.Extensions.Http
-public partial class List(HttpClient http) // Primary Constructor
+public partial class List(IHttpClientFactory factory) // Primary Constructor
 {
     private string message = $"Lorem ipsum {DateTime.Now}";
 
@@ -14,6 +14,8 @@ public partial class List(HttpClient http) // Primary Constructor
 
     protected override async Task OnInitializedAsync()
     {
+        var http = factory.CreateClient("CustomersApi");
+
         customers = await http.GetFromJsonAsync<IEnumerable<Customer>>("api/customers");
     }
 }
