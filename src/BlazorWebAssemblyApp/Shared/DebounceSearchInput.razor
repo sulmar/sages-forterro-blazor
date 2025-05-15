@@ -1,0 +1,35 @@
+﻿
+
+
+<input type="text" id="searchText" name="searchText" @bind="@searchText" @bind:after="@HandleSearch" @bind:event="oninput" />
+
+
+@code {
+
+    private CancellationTokenSource cts;
+
+    [Parameter]
+    public int DebounceMiliseconds { get; set; } = 500;
+
+    private string searchText = "a";
+
+    private async Task HandleSearch()
+    {
+        cts?.Cancel();
+        cts = new CancellationTokenSource();
+
+        var token = cts.Token;
+
+        try
+        {
+            await Task.Delay(DebounceMiliseconds, token);
+
+            if (!token.IsCancellationRequested)
+            {
+                Console.WriteLine(searchText);
+            }
+        }
+        catch (TaskCanceledException) { }
+    }
+
+}
