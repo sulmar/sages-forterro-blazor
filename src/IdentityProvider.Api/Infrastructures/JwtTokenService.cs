@@ -3,7 +3,6 @@ using IdentityProvider.Api.Models;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
-using System.Security.Claims;
 using System.Text;
 
 namespace IdentityProvider.Api.Infrastructures;
@@ -38,7 +37,7 @@ public class JwtTokenService : ITokenService
             [JwtRegisteredClaimNames.Birthdate] = userIdentity.Birthdate.ToShortDateString(),
 
             // Dodajemy role jako tablicę
-            [ClaimTypes.Role] = userIdentity.Roles.ToArray(),
+            ["role"] = userIdentity.Roles.ToArray(),
 
             ["Permission"] = userIdentity.Permissions.ToArray(),
 

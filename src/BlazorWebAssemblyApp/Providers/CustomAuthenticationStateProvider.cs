@@ -37,7 +37,7 @@ public class CustomAuthenticationStateProvider(LocalStorageService storage) : Au
         {
             var handler = new JsonWebTokenHandler();
             var jwt = handler.ReadJsonWebToken(token);
-            var identity = new ClaimsIdentity(jwt.Claims, "jwt");
+            var identity = new ClaimsIdentity(jwt.Claims, "jwt", "name", "role");
             var user = new ClaimsPrincipal(identity);
 
             return user;
