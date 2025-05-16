@@ -1,5 +1,6 @@
 ﻿@page "/dashboard"
 @using Microsoft.AspNetCore.SignalR.Client
+@implements IAsyncDisposable
 
 <h3>Dashboard</h3>
 
@@ -29,6 +30,8 @@ else
     // dotnet add package Microsoft.AspNetCore.SignalR.Client
     private HubConnection connection;
 
+    
+
     protected override async Task OnInitializedAsync()
     {
         connection = new HubConnectionBuilder()
@@ -45,8 +48,11 @@ else
 
         await connection.StartAsync();
         
-    }
+    }    
 
-    
+    public async ValueTask DisposeAsync()
+    {
+        await connection.StopAsync();
+    }
 
 }

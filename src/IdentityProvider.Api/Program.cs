@@ -72,7 +72,6 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
     policy.WithOrigins("https://localhost:7034").WithMethods("GET").AllowAnyHeader();
 }));
 
-
 var app = builder.Build();
 
 app.UseCors();
