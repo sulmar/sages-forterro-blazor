@@ -33,6 +33,13 @@ builder.Services.AddHttpClient("NbpApi", http =>
     http.BaseAddress = new Uri("https://api.nbp.pl/");
 });
 
+
+builder.Services.AddHttpClient<IAuthService, ApiAuthService>(http =>
+{
+    http.BaseAddress = new Uri("https://localhost:7227/");
+});
+
+
 builder.Services.AddCascadingValue<ApplicationState>(sp => new ApplicationState
 {
     ApplicationName = "Shopper",

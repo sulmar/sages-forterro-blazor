@@ -1,14 +1,26 @@
 ﻿@page "/products"
 @using BlazorWebAssemblyApp.Models
+@using Microsoft.AspNetCore.Components.Authorization
 @inject IProductService Api
+
 
 <h3>Product List</h3>
 
-<CascadingValue Value="@info">
-    <LoaderComponent Items="@products">
-        <ProductsTable Products="@products" />
-    </LoaderComponent>
-</CascadingValue>
+<AuthorizeView>
+    <Authorized>
+        <CascadingValue Value="@info">
+            <LoaderComponent Items="@products">
+                <ProductsTable Products="@products" />
+            </LoaderComponent>
+        </CascadingValue>
+    </Authorized>
+
+    <NotAuthorized>
+        <p>Welcome!</p>
+    </NotAuthorized>
+   
+
+</AuthorizeView>
 
 @code {
 

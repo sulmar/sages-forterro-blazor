@@ -31,7 +31,7 @@ public class CustomAuthenticationStateProvider(LocalStorageService storage) : Au
     // Tworzy ClaimsPrincipal na podstawie tokena JWT
     // Token jest parsowany lokalnie bez waliacji podpisu
     // W przypadku błędu zwracany jest anonimowy użytkownik
-    private ClaimsPrincipal CreateUserPrincipal(string token)
+    private static ClaimsPrincipal CreateUserPrincipal(string token)
     {
         try
         {

@@ -1,17 +1,73 @@
-﻿
+﻿@using BlazorWebAssemblyApp.Providers
+@using Microsoft.AspNetCore.Components.Authorization
+@inject IAuthService Api
+@inject AuthenticationStateProvider AuthStateProvider
+@inject NavigationManager Navigation
+
 <div class="login-menu d-flex align-items-center gap-2">
-    <input @bind="@Username" placeholder="login" class="form-control form-control-sm" />
-    <input @bind="@Password" placeholder="password" class="form-control form-control-sm" />
-    <button @onclick="@Login" class="btn btn-primary btn-sm" >Login</button>
+
+    @if (isAuthenticated.HasValue && isAuthenticated.Value)
+    {
+        <span class="me-2">@userName</span>
+        <button @onclick="@Logout" class="btn btn-danger btn-sm">Logout</button>
+    }
+    else
+    {
+        <input @bind="@Username" placeholder="login" class="form-control form-control-sm" />
+        <input @bind="@Password" placeholder="password" class="form-control form-control-sm" />
+        <button @onclick="@Login" class="btn btn-primary btn-sm">Login</button>
+    }
 </div>
 
 @code {
     private string Username = string.Empty;
     private string Password = string.Empty;
 
+    private bool? isAuthenticated;
+    private string? userName;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+
+        var user = authState.User;
+
+        isAuthenticated = user.Identity?.IsAuthenticated;
+        userName = user.Identity?.Name;
+
+    }
+
     private async Task Login()
     {
-        
+        var result = await Api.LoginAsync(Username, Password);
+
+        if (result is not null)
+        {
+            if (AuthStateProvider is CustomAuthenticationStateProvider provider)
+            {
+                await provider.NotifyUserAuthenticationAsync(result.AccessToken);
+            }
+
+            isAuthenticated = true;
+            userName = Username;
+
+            StateHasChanged();
+        }
+    }
+
+    private async Task Logout()
+    {
+        if (AuthStateProvider is CustomAuthenticationStateProvider provider)
+        {
+            await provider.NotifyUserLogoutAsync();
+
+            isAuthenticated = false;
+            userName = string.Empty;
+
+            Navigation.NavigateTo("/");
+        }
+
     }
 
 }
