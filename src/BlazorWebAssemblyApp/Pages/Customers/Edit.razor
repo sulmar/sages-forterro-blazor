@@ -12,7 +12,9 @@ else
 {
     <EditForm Model="@customer" OnValidSubmit="@HandleSubmit">
 
-        <DataAnnotationsValidator />
+        @* <DataAnnotationsValidator /> *@
+
+        <Blazored.FluentValidation.FluentValidationValidator />
 
         <ValidationSummary />
 
