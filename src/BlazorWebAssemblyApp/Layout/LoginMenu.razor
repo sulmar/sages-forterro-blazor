@@ -7,6 +7,11 @@
     <Authorized Context="auth">
         👤 @auth.User.Identity?.Name
         <!-- np. "john" -->
+        
+        @foreach (var role in auth.User.FindAll("role"))
+        {
+            <span class="badge bg-secondary ms-1">@role.Value</span>
+        }
         <button @onclick="@Logout" class="btn btn-danger btn-sm">Logout</button>
     </Authorized>
     <NotAuthorized>
