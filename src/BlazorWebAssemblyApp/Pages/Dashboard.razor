@@ -1,0 +1,52 @@
+﻿@page "/dashboard"
+@using Microsoft.AspNetCore.SignalR.Client
+
+<h3>Dashboard</h3>
+
+@if (item is null)
+{
+    <p>Waiting for data...</p>
+}
+else
+{
+    <article>
+        @item.CustomersCount
+    </article>
+
+    <article>
+        @item.ProductsCount
+    </article>
+
+    <article>
+        @item.Status
+    </article>
+}
+
+
+@code {
+    private DashboardItem item;
+
+    // dotnet add package Microsoft.AspNetCore.SignalR.Client
+    private HubConnection connection;
+
+    protected override async Task OnInitializedAsync()
+    {
+        connection = new HubConnectionBuilder()
+            .WithUrl("https://localhost:7214/signalr/dashboard")
+            .Build();
+
+
+        connection.On<DashboardItem>("UpdateDashboard", item =>
+        {
+            this.item = item;
+
+            StateHasChanged();
+        });
+
+        await connection.StartAsync();
+        
+    }
+
+    
+
+}

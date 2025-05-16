@@ -1,3 +1,5 @@
+using Api.BackgroundServices;
+using Api.Hubs;
 using Bogus;
 using Domain.Abstractions;
 using Domain.Models;
@@ -34,6 +36,10 @@ builder.Services.AddScoped<IEnumerable<Product>>(sp =>
 });
 builder.Services.AddScoped<IProductRepository, InMemoryProductRepository>();
 
+builder.Services.AddSignalR();
+
+builder.Services.AddHostedService<DashboardBackgroundService>();
+
 var app = builder.Build();
 
 app.UseCors();
@@ -44,5 +50,7 @@ app.MapGet("api/customers", async (ICustomerRepository repository) => await repo
 app.MapGet("api/customers/{id}", async (ICustomerRepository repository, int id) => await repository.GetByIdAsync(id));
 
 app.MapGet("api/products", async (IProductRepository productRepository) => await productRepository.GetAllAsync());
+
+app.MapHub<DashboardHub>("signalr/dashboard");
 
 app.Run();
