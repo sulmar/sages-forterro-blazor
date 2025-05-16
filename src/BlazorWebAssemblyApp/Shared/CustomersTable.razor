@@ -14,7 +14,10 @@
         <td>@customer.Email</td>
         <td>
             <a class="btn btn-primary" href="/customers/view/@customer.Id">View</a>
-            <a class="btn btn-secondary" href="/customers/edit/@customer.Id">Edit</a>
+
+            <AuthorizeView Roles="admin">
+                <a class="btn btn-secondary" href="/customers/edit/@customer.Id">Edit</a>
+            </AuthorizeView>
         </td>
     </RowTemplate>
 </TableTemplate>

@@ -59,8 +59,18 @@ builder.Services.AddScoped<IdentityContext>(sp =>
     };
 });
 
+
+builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
+{
+    // policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowAnyMethod();
+
+    policy.WithOrigins("https://localhost:7034").WithMethods("GET").AllowAnyHeader();
+}));
+
+
 var app = builder.Build();
 
+app.UseCors();
 
 app.MapGet("/", () => "Hello Auth.Api");
 
