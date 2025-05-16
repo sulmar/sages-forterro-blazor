@@ -15,7 +15,7 @@
         <td>
             <a class="btn btn-primary" href="/customers/view/@customer.Id">View</a>
 
-            <AuthorizeView Roles="admin">
+            <AuthorizeView Policy="Edit">
                 <a class="btn btn-secondary" href="/customers/edit/@customer.Id">Edit</a>
             </AuthorizeView>
 

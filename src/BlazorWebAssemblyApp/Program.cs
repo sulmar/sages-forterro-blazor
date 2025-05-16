@@ -1,4 +1,5 @@
 using BlazorWebAssemblyApp;
+using BlazorWebAssemblyApp.Authorization;
 using BlazorWebAssemblyApp.Models;
 using BlazorWebAssemblyApp.Providers;
 using BlazorWebAssemblyApp.Services;
@@ -49,9 +50,14 @@ builder.Services.AddScoped<LocalStorageService>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 builder.Services.AddAuthorizationCore(options =>
 {
-    options.AddPolicy("Print", policy => policy
-    .RequireAuthenticatedUser()
-    .RequireClaim("Permission", "canprint")); // .RequirePermission(Permisions.Canprint)
+    options.AddPolicy("Print", policy =>
+        policy.RequirePermission(Permissions.CanPrint));
+
+    options.AddPolicy("Edit", policy =>
+        policy.RequirePermission(Permissions.CanEdit));
+
+    options.AddPolicy("PrintOrEdit", policy => policy.RequirePermission(Permissions.CanPrint, Permissions.CanEdit));
+    
 });
 
 await builder.Build().RunAsync();
