@@ -11,7 +11,10 @@ public class CustomAuthenticationStateProvider(LocalStorageService storage) : Au
 {
     private const string TokenKey = "access_token";
 
-    private static AuthenticationState AnonymousState => new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
+    private static AuthenticationState AnonymousState => new AuthenticationState(Anonymous);
+
+    // Anonimowy użytkownik
+    private static ClaimsPrincipal Anonymous => new ClaimsPrincipal(new ClaimsIdentity());
 
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
     {
@@ -20,30 +23,37 @@ public class CustomAuthenticationStateProvider(LocalStorageService storage) : Au
         if (string.IsNullOrEmpty(jwt))
             return AnonymousState;
 
+        var principal = CreateUserPrincipal(jwt);
+
+        return new AuthenticationState(principal);
+    }
+
+    // Tworzy ClaimsPrincipal na podstawie tokena JWT
+    // Token jest parsowany lokalnie bez waliacji podpisu
+    // W przypadku błędu zwracany jest anonimowy użytkownik
+    private ClaimsPrincipal CreateUserPrincipal(string token)
+    {
         try
         {
             var handler = new JsonWebTokenHandler();
-            var token = handler.ReadJsonWebToken(jwt);
-            var identity = new ClaimsIdentity(token.Claims, "jwt");
+            var jwt = handler.ReadJsonWebToken(token);
+            var identity = new ClaimsIdentity(jwt.Claims, "jwt");
             var user = new ClaimsPrincipal(identity);
 
-            return new AuthenticationState(user);
+            return user;
         }
         catch
         {
-            return AnonymousState;
+            return Anonymous;
         }
     }
 
     public async Task NotifyUserAuthenticationAsync(string jwt)
     {
         await storage.SetAsync(TokenKey, jwt);
-        var handler = new JsonWebTokenHandler();
-        var token = handler.ReadJsonWebToken(jwt);
-        var identity = new ClaimsIdentity(token.Claims, "jwt");
-        var user = new ClaimsPrincipal(identity);
 
-        NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(user)));
+        var principal = CreateUserPrincipal(jwt);
+        NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(principal)));
     }
 
     public async Task NotifyUserLogoutAsync()
