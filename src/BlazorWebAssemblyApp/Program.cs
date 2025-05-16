@@ -52,6 +52,11 @@ builder.Services.AddCascadingValue<FilterState>(sp => new FilterState {  Selecte
 
 builder.Services.AddScoped<LocalStorageService>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
-builder.Services.AddAuthorizationCore();
+builder.Services.AddAuthorizationCore(options =>
+{
+    options.AddPolicy("Print", policy => policy
+    .RequireAuthenticatedUser()
+    .RequireClaim("Permission", "canprint")); // .RequirePermission(Permisions.Canprint)
+});
 
 await builder.Build().RunAsync();

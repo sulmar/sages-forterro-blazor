@@ -36,7 +36,8 @@ builder.Services.AddScoped<IdentityContext>(sp =>
         Email = "alice@example.com",
         PhoneNumber = "5551112233",
         Birthdate = DateTime.Parse("1990-06-15"),
-        Roles = new List<string> { "admin" }
+        Roles = new List<string> { "admin" },
+        Permissions = new List<string> { "canprint", "cansend" }
     };
     user2.PasswordHash = hasher.HashPassword(user2, "alicepass");
 
@@ -49,7 +50,8 @@ builder.Services.AddScoped<IdentityContext>(sp =>
         Email = "bob@example.com",
         PhoneNumber = "5559998877",
         Birthdate = DateTime.Parse("1985-03-20"),
-        Roles = new List<string> { "dev", "support" } // ← wiele ról
+        Roles = new List<string> { "dev", "support" }, // ← wiele ról
+        Permissions = new List<string> { "cansend" }
     };
     user3.PasswordHash = hasher.HashPassword(user3, "bobsecure");
 

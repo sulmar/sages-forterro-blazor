@@ -11,4 +11,5 @@ public class UserIdentity
     public string? PasswordHash { get; set; }
     public DateTime Birthdate { get; set; }
     public List<string> Roles { get; set; } = new();
+    public List<string> Permissions { get; set; } = [];
 }

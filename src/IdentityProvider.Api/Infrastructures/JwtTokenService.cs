@@ -38,7 +38,9 @@ public class JwtTokenService : ITokenService
             [JwtRegisteredClaimNames.Birthdate] = userIdentity.Birthdate.ToShortDateString(),
 
             // Dodajemy role jako tablicę
-            [ClaimTypes.Role] = userIdentity.Roles.ToArray()
+            [ClaimTypes.Role] = userIdentity.Roles.ToArray(),
+
+            ["Permission"] = userIdentity.Permissions.ToArray()
         };
 
 

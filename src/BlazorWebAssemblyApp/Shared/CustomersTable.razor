@@ -18,6 +18,11 @@
             <AuthorizeView Roles="admin">
                 <a class="btn btn-secondary" href="/customers/edit/@customer.Id">Edit</a>
             </AuthorizeView>
+
+            <AuthorizeView Policy="Print">
+                <button class="btn btn-secondary">Print</button>
+            </AuthorizeView>
+            
         </td>
     </RowTemplate>
 </TableTemplate>
