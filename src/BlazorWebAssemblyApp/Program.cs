@@ -1,11 +1,13 @@
 using BlazorWebAssemblyApp;
 using BlazorWebAssemblyApp.Models;
+using BlazorWebAssemblyApp.Providers;
 using BlazorWebAssemblyApp.Services;
 using Bogus;
 using Domain.Abstractions;
 using Domain.Models;
 using Infrastructure.Fakers;
 using Infrastructure.Repositories;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -39,5 +41,10 @@ builder.Services.AddCascadingValue<ApplicationState>(sp => new ApplicationState
 });
 
 builder.Services.AddCascadingValue<FilterState>(sp => new FilterState {  SelectedCustomerId = 1, SelectedUserId  = 2 });
+
+
+builder.Services.AddScoped<LocalStorageService>();
+builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+builder.Services.AddAuthorizationCore();
 
 await builder.Build().RunAsync();

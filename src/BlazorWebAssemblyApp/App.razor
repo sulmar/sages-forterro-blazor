@@ -1,15 +1,35 @@
-﻿
+﻿@using Microsoft.AspNetCore.Components.Authorization
+
 <ThemeCascadingValue>
-    <Router AppAssembly="@typeof(App).Assembly">
-        <Found Context="routeData">
-            <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
-            <FocusOnNavigate RouteData="@routeData" Selector="h1" />
-        </Found>
-        <NotFound>
-            <PageTitle>Not found</PageTitle>
-            <LayoutView Layout="@typeof(MainLayout)">
-                <p role="alert">Sorry, there's nothing at this address.</p>
-            </LayoutView>
-        </NotFound>
-    </Router>
+
+    <CascadingAuthenticationState>
+
+        <Router AppAssembly="@typeof(App).Assembly">
+            <Found Context="routeData">
+                <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" >
+                    <NotAuthorized>
+                        <LayoutView Layout="@typeof(AuthorizeLayout)">
+                            <p>Nie masz dostępu do strony</p>
+                        </LayoutView>                       
+                    </NotAuthorized>
+
+                    <Authorizing>
+                        <LayoutView Layout="@typeof(AuthorizeLayout)">
+                            <p>Trwa uwierzytelnianie...</p>
+                        </LayoutView>                       
+                    </Authorizing>
+
+                </AuthorizeRouteView>
+                <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+            </Found>
+            <NotFound>
+                <PageTitle>Not found</PageTitle>
+                <LayoutView Layout="@typeof(MainLayout)">
+                    <p role="alert">Sorry, there's nothing at this address.</p>
+                </LayoutView>
+            </NotFound>
+        </Router>
+
+    </CascadingAuthenticationState>
+
 </ThemeCascadingValue>

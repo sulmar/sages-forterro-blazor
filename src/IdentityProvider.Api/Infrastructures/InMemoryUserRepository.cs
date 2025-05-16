@@ -5,5 +5,5 @@ namespace IdentityProvider.Api.Infrastructures;
 
 public class InMemoryUserRepository(IdentityContext context) : IUserRepository
 {
-    public UserIdentity? GetUser(string username) => context.Users.FirstOrDefault(u => u.Username == username);
+    public UserIdentity? GetUser(string username) => context.Users.SingleOrDefault(u => u.Username == username);
 }
