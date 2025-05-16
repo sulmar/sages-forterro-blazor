@@ -2,7 +2,7 @@
     <Authorized Context="auth">
         @foreach (var claim in auth.User.FindAll(ClaimType))
         {
-            <span class="badge bg-secondary ms-1">@claim.Value</span>
+            <span class="badge badge-@ClaimType.ToLower() ms-1">@claim.Value</span>
         }
     </Authorized>
 </AuthorizeView>

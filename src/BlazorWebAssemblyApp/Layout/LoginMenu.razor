@@ -8,8 +8,8 @@
         👤 @auth.User.Identity?.Name
         <!-- np. "john" -->
 
-        <UserRolesBadge />
-        <UserRolesBadge ClaimType="permission" />
+        <UserClaimsBadge ClaimType="role"  />
+        <UserClaimsBadge ClaimType="permission" />
 
         <button @onclick="@Logout" class="btn btn-danger btn-sm">Logout</button>
     </Authorized>
