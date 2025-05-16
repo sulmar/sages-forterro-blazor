@@ -4,19 +4,19 @@
 
     <CascadingAuthenticationState>
 
-        <Router AppAssembly="@typeof(App).Assembly">
+        <Router AppAssembly="@typeof(App).Assembly" OnNavigateAsync="@NavigateHandler">
             <Found Context="routeData">
-                <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" >
+                <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
                     <NotAuthorized>
                         <LayoutView Layout="@typeof(AuthorizeLayout)">
                             <p>Nie masz dostępu do strony</p>
-                        </LayoutView>                       
+                        </LayoutView>
                     </NotAuthorized>
 
                     <Authorizing>
                         <LayoutView Layout="@typeof(AuthorizeLayout)">
                             <p>Trwa uwierzytelnianie...</p>
-                        </LayoutView>                       
+                        </LayoutView>
                     </Authorizing>
 
                 </AuthorizeRouteView>
@@ -33,3 +33,20 @@
     </CascadingAuthenticationState>
 
 </ThemeCascadingValue>
+
+@code {
+
+    private async Task NavigateHandler(NavigationContext context)
+    {
+        // Lazy load assemblies
+        // https://learn.microsoft.com/en-us/aspnet/core/blazor/webassembly-lazy-load-assemblies?view=aspnetcore-9.0
+
+        if (context.Path == "dashboard")
+        {
+            Console.WriteLine("Dashboard selected");
+        }
+
+       
+    }
+
+}
