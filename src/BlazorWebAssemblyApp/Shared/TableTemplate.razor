@@ -1,4 +1,4 @@
-﻿@typeparam TItem
+﻿@typeparam TItem where TItem : BaseEntity
 
 <table class="table table-@Theme">
     <thead>
@@ -10,7 +10,7 @@
     <tbody>
         @foreach (var item in Items)
         {
-            <tr>
+            <tr @key=item.Id>
                 @RowTemplate(item)
             </tr>
         }
