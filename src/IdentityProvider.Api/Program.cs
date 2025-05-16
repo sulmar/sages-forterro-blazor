@@ -73,7 +73,7 @@ app.MapPost("/api/login", async (LoginRequest request, IAuthService authService,
         // Generate JWT (Json Web Token)
         var accessToken = tokenService.GenerateAccessToken(result.Identity);
 
-        return Results.Ok(new { access_token = accessToken });
+        return Results.Ok(new { accessToken });
     }
 
     return Results.Unauthorized();
