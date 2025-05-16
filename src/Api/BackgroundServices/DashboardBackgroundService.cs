@@ -23,6 +23,10 @@ public class DashboardBackgroundService(
 
             await hubContext.Clients.All.SendAsync("UpdateDashboard", item, stoppingToken);
 
+            // await hubContext.Clients.Client(connectionId)
+
+            /// await hubContext.Clients.Group("Sales")
+
             await Task.Delay(Random.Shared.Next(100, 1000), stoppingToken);
         }
 

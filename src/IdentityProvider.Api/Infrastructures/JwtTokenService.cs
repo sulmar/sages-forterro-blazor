@@ -40,7 +40,9 @@ public class JwtTokenService : ITokenService
             // Dodajemy role jako tablicę
             [ClaimTypes.Role] = userIdentity.Roles.ToArray(),
 
-            ["Permission"] = userIdentity.Permissions.ToArray()
+            ["Permission"] = userIdentity.Permissions.ToArray(),
+
+            ["Department"] = userIdentity.Department
         };
 
 

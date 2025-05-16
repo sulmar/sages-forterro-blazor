@@ -23,7 +23,8 @@ builder.Services.AddScoped<IdentityContext>(sp =>
         Username = "john",
         Email = "john@example.com",
         PhoneNumber = "5554567890",
-        Birthdate = DateTime.Parse("2010-01-01")
+        Birthdate = DateTime.Parse("2010-01-01"),
+        Department = "Development"
     };
     user1.PasswordHash = hasher.HashPassword(user1, "123");
 
@@ -37,7 +38,8 @@ builder.Services.AddScoped<IdentityContext>(sp =>
         PhoneNumber = "5551112233",
         Birthdate = DateTime.Parse("1990-06-15"),
         Roles = new List<string> { "admin" },
-        Permissions = new List<string> { "canprint", "cansend" }
+        Permissions = new List<string> { "canprint", "cansend" },
+        Department = "Sales"
     };
     user2.PasswordHash = hasher.HashPassword(user2, "alicepass");
 
@@ -51,7 +53,8 @@ builder.Services.AddScoped<IdentityContext>(sp =>
         PhoneNumber = "5559998877",
         Birthdate = DateTime.Parse("1985-03-20"),
         Roles = new List<string> { "dev", "support" }, // ← wiele ról
-        Permissions = new List<string> { "cansend" }
+        Permissions = new List<string> { "cansend" },
+        Department = "Sales"
     };
     user3.PasswordHash = hasher.HashPassword(user3, "bobsecure");
 
