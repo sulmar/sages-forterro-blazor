@@ -35,6 +35,7 @@ builder.Services.AddHttpClient<IAuthService, ApiAuthService>(http =>
     http.BaseAddress = new Uri("https://localhost:7227/");
 });
 
+// 👉 Zamiast sztywnego wpisywania adresów zastosuj odkrywanie usług za pomocą biblioteki Microsoft.Extensions.ServiceDiscovery
 
 builder.Services.AddCascadingValue<ApplicationState>(sp => new ApplicationState
 {
