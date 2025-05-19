@@ -60,4 +60,6 @@ builder.Services.AddAuthorizationCore(options =>
     
 });
 
+builder.Services.AddCascadingAuthenticationState(); // 💡 Dostępne od .NET 9 Dzięki temu nie musisz już ręcznie owijać Router w CascadingAuthenticationState 
+
 await builder.Build().RunAsync();
