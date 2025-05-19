@@ -2,6 +2,8 @@
 
 namespace BlazorWebAssemblyApp.Services;
 
+
+// 💡 Wskazówka: Można skorzystać z gotowej implementacji z biblkoteki `Blazored.LocalStorage`
 public class LocalStorageService(IJSRuntime _js)
 {
     public Task SetAsync(string key, string value)  => _js.InvokeVoidAsync("localStorage.setItem", key, value).AsTask();
